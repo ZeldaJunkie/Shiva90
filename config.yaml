@@ -1,0 +1,315 @@
+units:
+  kx: u
+  ky: u
+  px: kx + 2
+  py: ky + 2
+  dpx: kx + 4
+  dpy: ky + 4
+  # Defaults to M2 Screws
+  screwSize: 1.5
+  standoffSize: 2.5
+points:
+  zones:
+    matrix:
+      anchor:
+        shift: [100, -100]
+      key:
+        padding: 1ky
+        spread: 1kx
+      columns:
+        arrows:
+          rows:
+            top.skip: true
+            fun.skip: true
+            num.skip: true
+            home.skip: true
+            fa.skip: true
+          key:
+            column_net: P104
+        outer:
+          rows:
+            top.skip: true
+            fa.skip: true
+          key:
+            column_net: P011
+        pinky:
+          rows:
+            top.skip: true
+            fa.skip: true
+          key:
+            column_net: P100
+        ring:
+          key:
+            stagger: 5
+            column_net: P024
+        middle:
+          key:
+            stagger: 2.5
+            column_net: P022
+        index:
+          key:
+            stagger: -2.5
+            column_net: P020
+          rows:
+            fa.skip: true
+        inner:
+          rows:
+            mod.skip: true
+            fa.skip: true
+          key:
+            stagger: -2.5
+            column_net: P017
+        f45rfc:
+          rows:
+            mod.skip: true
+            bottom.skip: true
+            fa.skip: true
+          key:
+            stagger: -2.5
+            column_net: P008
+        f6:
+          rows:
+            mod.skip: true
+            bottom.skip: true
+            home.skip: true
+            top.skip: true
+            num.skip: true
+            fa.skip: true
+          key:
+            stagger: -2.5
+            column_net: P006
+      rows:
+        fa:
+         row_net: P106
+        mod:
+         row_net: P009
+        bottom:
+         row_net: P010
+        home:
+         row_net: P111
+        top:
+         row_net: P113
+        num:
+         row_net: P115
+        fun:
+         row_net: P002
+    thumbs:
+      key:
+        padding: 1ky
+        spread: 1kx
+      anchor:
+        ref: matrix_inner_mod
+        shift: [2, -2]
+      columns:
+        layer:
+          key.splay: -15
+          key.column_net: P029
+        space:
+          key:
+            width: 2.75kx
+            splay: 75
+            shift: [2,-2]
+            column_net: P107
+    arrows:
+     columns:
+      tab:
+       key:
+        shift: [1.5kx, 4ky]
+        column_net: P101
+        width: 2kx
+outlines:
+  raw:
+    - what: rectangle
+      where: true
+      bound: true
+      size: [px, py]
+  keys:
+    - what: rectangle
+      where: true
+      bound: false
+      size: [kx-0.5,ky-0.5]
+  board:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: matrix_middle_fa
+          shift: [-0.5px,-1py]
+        - ref: matrix_ring_fa
+          shift: [-0.5px,-1py]
+        - ref: matrix_arrows_mod
+          shift: [-0.5px,-0.4py]
+        - ref: matrix_arrows_bottom
+          shift: [-0.5px,-0.4py]
+        - ref: matrix_outer_fun
+          shift: [-1.5px,0.8py]
+        - ref: matrix_middle_fun
+          shift: [0.5px,0.5py]
+        - ref: matrix_f6_fun
+          shift: [0.5px,0.5py]
+        - ref: thumbs_space
+          shift: [-1py,-1.9px]
+      fillet: 2
+  xlBoard:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: matrix_middle_fa
+          shift: [-0.5dpx,-1dpy]
+        - ref: matrix_ring_fa
+          shift: [-0.5dpx,-1dpy]
+        - ref: matrix_arrows_mod
+          shift: [-0.5dpx,-0.4dpy]
+        - ref: matrix_arrows_bottom
+          shift: [-0.5dpx,-0.4dpy]
+        - ref: matrix_outer_fun
+          shift: [-1.5dpx,0.8dpy]
+        - ref: matrix_middle_fun
+          shift: [0.5dpx,0.5dpy]
+        - ref: matrix_f6_fun
+          shift: [0.5dpx,0.5dpy]
+        - ref: thumbs_space
+          shift: [-1dpy,-1.9dpx]
+      fillet: 2
+  combo:
+    - name: board
+    - operation: subtract
+      name: keys
+  mounting:
+    - what: circle
+      radius: screwSize
+      where:
+        ref: [matrix_outer_fun]
+        shift: [0.5kx, -0.35ky]
+    - what: circle
+      radius: screwSize
+      where:
+        ref: [matrix_outer_mod]
+        shift: [0.5kx, -0.35ky]
+    - what: circle
+      radius: screwSize
+      where:
+        ref: [matrix_middle_fa]
+        shift: [-0.5kx, -0.3ky]
+    - what: circle
+      radius: screwSize
+      where:
+        ref: [thumbs_space]
+        shift: [0.4kx, -0.3ky]
+    - what: circle
+      radius: screwSize
+      where:
+        ref: [matrix_f6_fun]
+        shift: [0.4kx, -0.3ky]
+  standoff:
+    - what: circle
+      radius: standoffSize
+      where:
+        ref: [matrix_outer_fun]
+        shift: [0.5kx, -0.35ky]
+    - what: circle
+      radius: standoffSize
+      where:
+        ref: [matrix_outer_mod]
+        shift: [0.5kx, -0.35ky]
+    - what: circle
+      radius: standoffSize
+      where:
+        ref: [matrix_middle_fa]
+        shift: [-0.5kx, -0.3ky]
+    - what: circle
+      radius: standoffSize
+      where:
+        ref: [thumbs_space]
+        shift: [0.4kx, -0.3ky]
+    - what: circle
+      radius: standoffSize
+      where:
+        ref: [matrix_f6_fun]
+        shift: [0.4kx, -0.3ky]
+pcbs:
+  tutorial:
+    outlines:
+      main:
+        outline:
+          board
+    footprints:
+      mx_hotswap:
+        what: mx
+        where: true
+        params:
+          keycaps: true
+          reverse: false
+          hotswap: true
+          from: "{{column_net}}"
+          to: "{{colrow}}"
+      diode:
+        what: diode
+        where: true
+        params:
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+        adjust:
+          shift: [0, -5]
+      nice_nano:
+        what: nice_nano
+        params:
+          orientation: down
+        where:
+          ref: matrix_outer_fun
+          shift: [-1, -1]
+          rotate: -90
+      jstph:
+        what: jstph
+        where:
+          ref: matrix_outer_home
+          shift: [-7, 5.5]
+          rotate: 90
+        params:
+            side: B
+            pos: pos
+            neg: GND
+      reset:
+        what: button
+        params:
+          from: GND
+          to: RST
+        where:
+          ref.aggregate.parts: [matrix_arrows_mod]
+          shift: [0, -1]
+          rotate: -90
+      # Battery on/off switch
+      battery_switch:
+        what: slider
+        where:
+            ref: matrix_arrows_bottom
+            shift: [8.8, -6.0]
+            rotate: -90
+        params:
+            side: B
+            from: pos
+            to: RAW
+      holeTopLeft:
+        what: mountinghole
+        where:
+          ref: [matrix_outer_fun]
+          shift: [0.5kx, -0.35ky]
+      holeMidLeft:
+        what: mountinghole
+        where:
+          ref: [matrix_outer_mod]
+          shift: [0.5kx, -0.35ky]
+      holeBottomLeft:
+        what: mountinghole
+        where:
+          ref: [matrix_middle_fa]
+          shift: [-0.5kx, -0.3ky]
+      holeBottomRight:
+        what: mountinghole
+        where:
+          ref: [thumbs_space]
+          shift: [0.4kx, -0.3ky]
+      holeTopRight:
+        what: mountinghole
+        where:
+          ref: [matrix_f6_fun]
+          shift: [0.4kx, -0.3ky]
